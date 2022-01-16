@@ -3,15 +3,6 @@
 #include <BotOp/bot.h>
 #include <BotOp/motionHelpers.h>
 
-<<<<<<< HEAD
-using namespace std;
-
-int main()
-{
-    //rai::Configuration C("../../botop/rai-robotModels/scenarios/pandasTable.g");
-
-    return 0;
-=======
 //===========================================================================
 
 void collectJointData(){
@@ -169,5 +160,4 @@ int main(int argc, char * argv[]){
   postprocessData();
 
   return 0;
->>>>>>> 4186d1f8b7fcf3cd2748f14b0ac0881980e98f46
 }
