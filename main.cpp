@@ -157,7 +157,13 @@ int main(int argc, char * argv[]){
   rai::initCmdLine(argc, argv);
 
 //  collectJointData();
-  postprocessData();
+//  postprocessData();
+  arr W = randn(7, 21);
+  for (int i=0; i < 21; i ++){
+      arr state = randn(21,1);
+      arr res = W * state;
+      cout << res;
+  }
 
   return 0;
 }
