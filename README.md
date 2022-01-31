@@ -10,3 +10,15 @@ for i in range(62, len(q_real)):
     feature = np.concatenate([np.ones([1,1]), feature], axis=1)
     res.append(feature @ beta)
 ```
+
+
+```
+def feature(X):
+	aug = X
+	for k in range(1,7):
+	    aug = np.concatenate([aug, np.sin(k * X)], axis=1)
+	    aug = np.concatenate([aug, np.cos(k * X)], axis=1)
+	poly = PolynomialFeatures(1)
+	X = poly.fit_transform(aug)
+	return X
+```
