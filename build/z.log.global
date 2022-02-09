@@ -1,6 +1,0 @@
-** compiled at:     Oct 24 2021 14:02:27
-** execution start: 2021-12-06 18:45:27:758925
-/home/jiayun/git/botop/rai/rai/Kin/../Core/array.ipp:operator():922(-2) CHECK failed: 'nd==1 && (uint)i<d0' -- 1D range error (1=1, 2<1)
-** execution stop: 2021-12-06 18:45:27:759488
-** real time: 0.000568031sec
-** CPU time: 0.010343
