@@ -185,11 +185,46 @@ void postprocessData(){
     }
 
 }
+
+void tune_pd(){
+    rai::Configuration C("../../rai-robotModels/scenarios/pandasTable.g");
+    arr q0 = C.getJointState();
+    arr qLimits = C.getLimits();
+    q0.reshape(1,14);
+    arr times = {0.001};
+    times.reshape(1,1);
+    arr path = q0;
+    int jointID = 0;
+    double lo = qLimits(jointID, 0)+.1;
+    double up = qLimits(jointID, 1)-.1;
+    double speed_factor = 1;
+    double range_factor = 0.5;
+    for (uint i = 2; i<8000; i++){
+        arr temp_time = {i * 0.001};
+        temp_time.reshape(1,1);
+        times.append(temp_time);
+        if (sin(speed_factor*temp_time(0,0)) > up || sin(speed_factor*temp_time(0,0)) < lo){
+            q0 = q0;
+        }else{
+            q0(-1, jointID) = range_factor * sin(speed_factor*temp_time(0,0));
+        }
+
+        path.append(q0);
+    }
+    times += 1.;
+    LOG(0) << path.dim() << times.dim();
+    BotOp bot(C, rai::checkParameter<bool>("false")); //false
+    bot.robotL->writeData=2;
+    bot.move(path, times);
+    while(bot.step(C)){}
+    bot.robotL->writeData=0;
+    bot.home(C);
+    rai::wait();
+}
 //===========================================================================
 int main(int argc, char * argv[]){
   rai::initCmdLine(argc, argv);
-  collectTrackingData();
+  tune_pd();
 //  collectTrackingData();
   return 0;
 }
-
